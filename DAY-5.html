@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete HTML Form – All Elements & Attributes</title>
+
+<!--
+=====================================================================
+  COMPLETE HTML FORM — ALL ELEMENTS & ATTRIBUTES IN ONE FILE
+  Banaya gaya hai exam revision ke liye — GLA University
+=====================================================================
+  INDEX (Ctrl+F se seedha section pe jump kar sakte ho):
+  01. Personal & Contact Details   -> text, email, tel, password, url, search
+  02. Academic Details             -> readonly, disabled, datalist, optgroup, multiple select
+  03. Address                      -> textarea
+  04. Date & Time                  -> date, time, datetime-local, month, week
+  05. Number & Range               -> number, range, output
+  06. Radio & Checkbox             -> radio groups, checkbox groups, label wrapping
+  07. File Upload                  -> file, accept, multiple
+  08. Special Inputs               -> color, progress, meter, hidden
+  09. Buttons                      -> submit, reset, button, image, formnovalidate
+  + Quick Revision Cheat-Sheet at the very bottom (page pe hi dikhta hai)
+
+  IMPORTANT: Yeh saare comments (jo har element/attribute explain karte
+  hain) sirf CODE EDITOR mein dikhenge (VS Code, Notepad++, Sublime).
+  Browser HTML comments ko RENDER nahi karta, isliye agar sirf preview
+  dekhoge to yeh notes miss ho jayenge. Exam revision ke liye is FILE ko
+  editor mein khol ke top se bottom padhna sabse best rahega.
+=====================================================================
+-->
+</head>
+<body>
+
+<div class="editor-topbar">
+  <span class="glyph">&lt;/&gt;</span>
+  <span class="filename">complete-html-form-revision.html</span>
+  <span class="tag">read-only · revision copy</span>
+</div>
+
+<div class="page">
+  <h1>Complete HTML Form — Every Element & Attribute</h1>
+
+  <!--
+    ============================================================
+    THE <form> TAG ITSELF
+    ============================================================
+    action        : woh server URL jaha data submit hota hai (yaha "#" hai
+                    kyunki koi real backend nahi hai — yeh sirf ek revision file hai)
+    method="POST" : GET vs POST — GET data ko URL mein (?key=value) bhejta hai,
+                    isiliye chhota data + non-sensitive info ke liye theek hai
+                    (bookmark bhi ho sakta hai). POST data ko request BODY mein
+                    bhejta hai — sensitive data, bade forms, aur FILE UPLOADS
+                    ke liye zaroori hai.
+    enctype       : "multipart/form-data" tab ZAROORI hota hai jab form ke
+                    andar koi <input type="file"> ho — warna file properly
+                    server tak nahi pahunchti.
+    autocomplete  : "on" pe form-level default set kar diya — isko individual
+                    fields pe "off" karke override bhi kar sakte hain (aage
+                    password field mein dekhoge).
+  -->
+  <form action="#" method="POST" enctype="multipart/form-data" autocomplete="on" name="registrationForm" id="registrationForm">
+
+    <!-- ================= SECTION 01 ================= -->
+    <fieldset>
+      <legend>01 · Personal & Contact Details</legend>
+
+      <!-- <label for="id"> ka pehla method: label ka "for" attribute input ke "id" se match hota hai.
+           Isse label pe click karne se bhi input focus ho jaata hai (accessibility ke liye important). -->
+      <label for="father_name">Father's Name:</label>
+      <input type="text" id="father_name" name="father_name" placeholder="e.g. name" minlength="3" maxlength="50" autofocus required>
+      <small class="hint">minlength/maxlength text ki min/max length control karte hain. autofocus poore page mein SIRF EK field pe hona chahiye.</small>
+
+      <label for="mother_name">Mother's Name:</label>
+      <input type="text" id="mother_name" name="mother_name" placeholder="e.g. name" required>
+
+      <!-- type="email" browser ko khud @ aur . ka basic format check karne deta hai, extra JS nahi likhni padti -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <!-- pattern = ek regex jiske against value check hoti hai. title = jab pattern match na ho tab
+           browser jo tooltip dikhata hai woh isi text se aata hai -->
+      <label for="phone">Phone No:</label>
+      <input type="tel" id="phone" name="phone" pattern="[6-9][0-9]{9}" title="10-digit mobile number, starting 6-9" placeholder="9876543210" required>
+      <small class="hint">Format: 10 digit number, 6-9 se start hona chahiye (Indian mobile pattern)</small>
+
+      <!-- autocomplete="new-password" yaha form-level "on" ko OVERRIDE kar raha hai — per-field override possible hai -->
+      <label for="password">Create Password:</label>
+      <input type="password" id="password" name="password" minlength="8" pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}" title="Kam se kam 8 characters, ek letter aur ek number zaroor ho" autocomplete="new-password" required>
+      <small class="hint">password type characters ko ●●● dikhata hai, values ko hide karta hai screen pe</small>
+
+      <label for="portfolio">Portfolio / LinkedIn (optional):</label>
+      <input type="url" id="portfolio" name="portfolio" placeholder="https://linkedin.com/in/...">
+
+      <label for="search_course">Search Course:</label>
+      <input type="search" id="search_course" name="search_course" placeholder="Type to search...">
+      <small class="hint">search type text jaisa hi hai, kuch browsers isme ek extra "clear (x)" button dete hain</small>
+    </fieldset>
+
+    <!-- ================= SECTION 02 ================= -->
+    <fieldset>
+      <legend>02 · Academic Details</legend>
+
+      <label for="roll_no">Roll No (readonly):</label>
+      <input type="text" id="roll_no" name="roll_no" value="24CS1234" readonly>
+      <small class="hint">readonly = user EDIT nahi kar sakta, PAR form submit hone par value chali jaati hai</small>
+
+      <label for="student_id">System Generated ID (disabled):</label>
+      <input type="text" id="student_id" name="student_id" value="AUTO-GEN-0099" disabled>
+      <small class="hint">disabled = na edit hoga na hi submit hoga — field poori tarah form data se BAAHAR rehti hai</small>
+
+      <!-- list attribute is input ko neeche wale <datalist> se jodta hai -->
+      <label for="course">Preferred Course:</label>
+      <input type="text" id="course" name="course" list="courseOptions" placeholder="Type karo ya list se choose karo">
+      <datalist id="courseOptions">
+        <option value="B.Tech Computer Science">
+        <option value="B.Tech Electronics">
+        <option value="BCA">
+        <option value="MCA">
+      </datalist>
+      <small class="hint">datalist select se DIFFERENT hai — yaha user list ke bahar bhi apna khud ka text type kar sakta hai</small>
+
+      <!-- multiple attribute select ko multi-pick listbox bana deta hai, Ctrl/Cmd+Click se select hote hain -->
+      <label for="subjects">Subjects of Interest (Ctrl/Cmd + Click for multiple):</label>
+      <select id="subjects" name="subjects" multiple size="4">
+        <option value="dsa">Data Structures</option>
+        <option value="toc">Theory of Computation</option>
+        <option value="dbms">DBMS</option>
+        <option value="os">Operating Systems</option>
+        <option value="ml">Machine Learning</option>
+      </select>
+
+      <!-- optgroup options ko dropdown ke andar hi category-wise group kar deta hai -->
+      <label for="state">State:</label>
+      <select id="state" name="state" required>
+        <option value="">Select State</option>
+        <optgroup label="North India">
+          <option>Uttar Pradesh</option>
+          <option>Delhi</option>
+          <option>Punjab</option>
+        </optgroup>
+        <optgroup label="South India">
+          <option>Karnataka</option>
+          <option>Tamil Nadu</option>
+          <option>Kerala</option>
+        </optgroup>
+      </select>
+
+      <!-- Neeche kisi <option> mein "value" attribute nahi diya gaya — jab value missing ho to
+           option ke ANDAR wala text hi automatically value ban jaata hai -->
+      <label for="blood_group">Blood Group:</label>
+      <select id="blood_group" name="blood_group" required>
+        <option value="">Select Blood Group</option>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>AB+</option>
+        <option>AB-</option>
+        <option>O+</option>
+        <option>O-</option>
+      </select>
+    </fieldset>
+
+    <!-- ================= SECTION 03 ================= -->
+    <fieldset>
+      <legend>03 · Address</legend>
+      <label for="address">Full Address:</label>
+      <textarea id="address" name="address" rows="4" cols="30" maxlength="200" placeholder="House No, Street, City, State, PIN" required></textarea>
+      <small class="hint">maxlength textarea mein bhi kaam karta hai, text input ki tarah hi</small>
+    </fieldset>
+
+    <!-- ================= SECTION 04 ================= -->
+    <fieldset>
+      <legend>04 · Date & Time (5 types total)</legend>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="viva_time">Preferred Viva Time:</label>
+      <input type="time" id="viva_time" name="viva_time">
+
+      <label for="appointment">Counselling Appointment:</label>
+      <input type="datetime-local" id="appointment" name="appointment">
+      <small class="hint">datetime-local = date + time dono ek hi field mein</small>
+
+      <label for="session">Admission Session:</label>
+      <input type="month" id="session" name="session">
+
+      <label for="exam_week">Preferred Exam Week:</label>
+      <input type="week" id="exam_week" name="exam_week">
+    </fieldset>
+
+    <!-- ================= SECTION 05 ================= -->
+    <fieldset>
+      <legend>05 · Number & Range</legend>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="15" max="30" step="1" value="20">
+
+      <!-- oninput se range slider move karte hi <output> live update ho jaata hai.
+           "skill_rating" aur "skillOutput" yaha unke id se hi bare JS variables ki tarah
+           access ho rahe hain — yeh <output> ka classic textbook use-case hai -->
+      <label for="skill_rating">Rate your HTML skill (1-100):</label>
+      <input type="range" id="skill_rating" name="skill_rating" min="1" max="100" value="50" oninput="skillOutput.value = skill_rating.value">
+      <output name="skillOutput" id="skillOutput" for="skill_rating">50</output>
+      <small class="hint">output ka "for" attribute batata hai ye value kis input se related hai</small>
+    </fieldset>
+
+    <!-- ================= SECTION 06 ================= -->
+    <fieldset>
+      <legend>06 · Radio & Checkbox</legend>
+
+      <label class="inline-label">Gender:</label>
+      <br>
+      <!-- teeno radio ka "name" SAME hai ("gender") isiliye ek time pe sirf EK hi select ho sakta hai -->
+      <input type="radio" id="gender_male" name="gender" value="male" checked>
+      <label class="inline-label" for="gender_male">Male</label>
+      <input type="radio" id="gender_female" name="gender" value="female">
+      <label class="inline-label" for="gender_female">Female</label>
+      <input type="radio" id="gender_other" name="gender" value="other">
+      <label class="inline-label" for="gender_other">Other</label>
+
+      <br><br>
+      <label class="inline-label">Category:</label>
+      <br>
+      <!-- Yeh ek DUSRA radio group hai — isiliye "name" jaan-boojh kar alag rakha ("category"),
+           warna yeh gender wale group ke saath mix ho jaata aur dono groups tootke ek ho jaate -->
+      <input type="radio" id="cat_gen" name="category" value="general" checked>
+      <label class="inline-label" for="cat_gen">General</label>
+      <input type="radio" id="cat_obc" name="category" value="obc">
+      <label class="inline-label" for="cat_obc">OBC</label>
+      <input type="radio" id="cat_sc_st" name="category" value="sc_st">
+      <label class="inline-label" for="cat_sc_st">SC/ST</label>
+
+      <br><br>
+      <label class="inline-label">Hobbies:</label>
+      <br>
+      <!-- checkbox mein SAME "name" rakhne par bhi MULTIPLE values select ho sakti hain
+           (radio se yahi sabse bada difference hai). PHP backend mein array lene ke liye
+           kabhi kabhi name="hobbies[]" bhi likha jaata hai -->
+      <input type="checkbox" id="hobby_coding" name="hobbies" value="coding" checked>
+      <label class="inline-label" for="hobby_coding">Coding</label>
+      <input type="checkbox" id="hobby_music" name="hobbies" value="music">
+      <label class="inline-label" for="hobby_music">Music</label>
+      <input type="checkbox" id="hobby_sports" name="hobbies" value="sports">
+      <label class="inline-label" for="hobby_sports">Sports</label>
+
+      <!-- Yeh <label> ka DOOSRA method hai — "WRAPPING". Input ko seedha label ke ANDAR rakh diya,
+           isliye alag se for/id ki zaroorat nahi. Text pe click karne se bhi checkbox toggle hoga -->
+      <label class="checkbox-wrap">
+        <input type="checkbox" id="terms" name="terms" required>
+        I agree to the Terms and Conditions
+      </label>
+    </fieldset>
+
+    <!-- ================= SECTION 07 ================= -->
+    <fieldset>
+      <legend>07 · File Upload</legend>
+
+      <label for="photo">Profile Photo:</label>
+      <input type="file" id="photo" name="photo" accept="image/png, image/jpeg">
+
+      <label for="documents">Documents (Marksheet / ID) — multiple allowed:</label>
+      <input type="file" id="documents" name="documents" accept=".pdf,.doc,.docx" multiple>
+      <small class="hint">File upload ke kaam karne ke liye form ka enctype="multipart/form-data" hona ZAROORI hai (upar dekho)</small>
+    </fieldset>
+
+    <!-- ================= SECTION 08 ================= -->
+    <fieldset>
+      <legend>08 · Special Inputs</legend>
+
+      <label for="fav_color">Favourite Color:</label>
+      <input type="color" id="fav_color" name="fav_color" value="#3b6fd4">
+
+      <!-- progress ek DETERMINATE task ka % complete dikhata hai -->
+      <label for="profile_progress">Profile Completion:</label>
+      <progress id="profile_progress" value="70" max="100">70%</progress>
+
+      <!-- meter ek FIXED range ke andar ki value dikhata hai (jaise ek gauge/speedometer) —
+           progress se yahi farak hai: progress = task complete hona, meter = ek measurement -->
+      <label for="cpi_meter">CPI (out of 10):</label>
+      <meter id="cpi_meter" min="0" max="10" low="4" high="8" optimum="10" value="7.5">7.5/10</meter>
+
+      <!-- hidden field user ko screen pe kabhi nahi dikhta, but form submit hote waqt
+           iski value bhi chali jaati hai — CSRF tokens, form-ids waghera ke liye common use -->
+      <input type="hidden" id="form_token" name="form_token" value="reg_2026_gla">
+    </fieldset>
+
+    <!-- ================= SECTION 09 ================= -->
+    <fieldset>
+      <legend>09 · Buttons</legend>
+      <div class="btn-row">
+        <button type="submit">Submit Form</button>
+        <button type="reset">Reset Form</button>
+        <button type="button" onclick="alert('Yeh sirf JS chalata hai, form submit NAHI hota!')">Custom Action</button>
+        <!-- formnovalidate SIRF is button ke liye saari required/pattern validation skip kar deta hai
+             (form ke baaki buttons pe validation normal chalti rahegi) -->
+        <button type="submit" formnovalidate>Save as Draft</button>
+      </div>
+      <small class="hint">Gotcha: agar &lt;button&gt; ka type mention na karo, to DEFAULT type "submit" hi hota hai!</small>
+
+      <br><br>
+      <!-- input type="image" ek image-based submit button hai — click karne par uske x,y
+           coordinates bhi form data ke saath submit hote hain. Accessibility issues ki wajah se
+           aajkal kam recommend kiya jaata hai, but exam mein pucha ja sakta hai -->
+      <label class="inline-label">Or submit via image button:</label><br>
+      <input type="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='132' height='36'%3E%3Crect width='132' height='36' rx='6' fill='%233b6fd4'/%3E%3C/svg%3E" alt="Submit (Image Button)" width="132" height="36">
+    </fieldset>
+
+  </form>
+
+  <!-- 
+------------------------------------------------------------
+Quick Revision Cheat-Sheet
+------------------------------------------------------------
+
+Yeh tables page pe hi visible hain — editor kholne ki zaroorat nahi.
+
+------------------------------------------------------------
+All 22 Input Types
+------------------------------------------------------------
+text              → Plain text — naam, address waghera
+password          → Characters ko ●●● dikhata hai
+email             → @ aur . ka basic format auto-check
+tel               → Phone number, pattern se format check
+url               → Valid URL format check karta hai
+number            → Sirf numbers, min/max/step ke saath
+date              → Date picker
+month             → Sirf month + year
+week              → Week number + year
+time              → Sirf time
+datetime-local    → Date + time ek saath
+color             → Color picker, hex value deta hai
+range             → Slider — min-max ke beech koi bhi value
+checkbox          → 0 ya zyada options select ho sakte hain
+radio             → Group mein se sirf EK option
+file              → File upload
+hidden            → User ko nahi dikhta, data carry karta hai
+search            → Search box
+submit            → Form submit karta hai
+reset             → Form ko default values pe wapas le jaata hai
+button            → Custom JS action, khud se submit NAHI karta
+image             → Image wala submit button, x/y coords bhi bhejta hai
+
+------------------------------------------------------------
+Common Attributes
+------------------------------------------------------------
+required          → Field khali nahi chhod sakte
+placeholder       → Halka grey hint text — yeh VALUE nahi hai
+readonly          → Dikhega, edit nahi hoga, PAR submit hoga
+disabled          → Grey ho jaata hai, edit na submit — kuch nahi
+maxlength/minlength → Text ki max/min length (characters mein)
+min/max/step      → Number/date/range ki limit aur increment
+pattern           → Regex ke against value validate karta hai
+autofocus         → Page load hote hi cursor yahi aata hai (1 field/page)
+autocomplete      → Browser purani values suggest kare ya nahi
+multiple          → Select/file mein ek se zyada choose karne do
+list              → Input ko ek datalist se jodta hai
+
+------------------------------------------------------------
+GET vs POST
+------------------------------------------------------------
+GET   → Data URL mein dikhta hai (?key=value), limited size, bookmark ho sakta hai
+POST  → Data request body mein hidden rehta hai, bada/sensitive data + file uploads ke liye
+
+------------------------------------------------------------
+Editable vs Form Data
+------------------------------------------------------------
+readonly → Editable: No, Form data: Yes
+disabled → Editable: No, Form data: No
+required → Editable: Yes, Form data: Yes (khali nahi chhod sakte)
+
+------------------------------------------------------------
+Selection Elements
+------------------------------------------------------------
+checkbox        → 0 ya zyada (multiple allowed)
+radio           → Sirf 1 (apne group ke andar)
+select (normal) → Sirf 1
+select multiple → Zyada (Ctrl/Cmd + Click)
+datalist        → List se choose karo YA khud free text type karo
+
+------------------------------------------------------------
+Footer
+------------------------------------------------------------
+HTML5 · UTF-8 · made for exam revision — sab best ho jaye 🎯
+------------------------------------------------------------
+-->
+
+
+
+</body>
+</html>
