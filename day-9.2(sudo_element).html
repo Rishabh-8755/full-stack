@@ -4,9 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=\, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        div::after{
+            content: "Gla";
+            color: red;
+        }
+        p::before{
+            content: "chacha";
+            color: rgb(0, 255, 149);
+        }
+        span{
+            text-transform: capitalize;
+        }
+        /* first letter first line are aplicable for block-level elements */
+        section::first-letter{
+            color: red;
+            font-weight: bolder;
+        }
+        article::first-line{
+            color: blue;
+            font-family: cursive;
+        }
+    </style>
 </head>
 <body>
     <!--pesudo element is used to add/insert/modify specific parts of the element .it is represented by -->
+    <div>i m from </div>
+    <p> mathura</p>
+
+    <span>i love coding</span>
+    <article> i love to travel and explore new places and meet new people and learn about their culture and lifestyle. i also love to try new food and learn about their cooking style. i also love to learn new languages and communicate with people in their native language. i also love to learn about their history and traditions. i also love to learn about their festivals and celebrations. i also love to learn about their art and music. i also love to learn about their sports and games. i also love to learn about their fashion and clothing style. i also love to learn about their architecture and monuments. i also love to learn about their wildlife and nature. i also love to learn about their technology and innovations. i also love to learn about their education system and schools. i also love to learn about their healthcare system and hospitals. i also love to learn about their transportation system and vehicles. i also love to learn about their economy and business opportunities. i also love to learn about their politics and government system. i also love to learn about their social issues and challenges. i also love to learn about their environmental issues and conservation efforts. i also love to learn about their religious beliefs and practices. i also love to learn about their cultural diversity and inclusivity.
+    </article>
     
 </body>
 </html>
