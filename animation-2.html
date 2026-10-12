@@ -1,0 +1,68 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition Timing Functions</title>
+
+    <style>
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin: 10px;
+
+            transition-property: transform;
+            transition-duration: 2s;
+        }
+
+        /* Individual timing functions */
+        /*linear is a timing function that allows you to control the speed of the transition. It is represented by the keyword linear. The other timing functions are:
+        ease is a timing function that allows you to control the speed of the transition. It is represented by the keyword ease. The other timing functions are:
+        ease-in is a timing function that allows you to control the speed of the transition. It is represented by the keyword ease-in. The other timing functions are:
+        ease-out is a timing function that allows you to control the speed of the transition. It is represented by the keyword ease-out. The other timing functions are:
+        ease-in-out is a timing function that allows you to control the speed of the transition.
+         */
+
+        .linear {
+            transition-timing-function: linear;
+        }
+
+        .ease {
+            transition-timing-function: ease;
+        }
+
+        .ease-in {
+            transition-timing-function: ease-in;
+        }
+
+        .ease-out {
+            transition-timing-function: ease-out;
+        }
+
+        .ease-in-out {
+            transition-timing-function: ease-in-out;
+        }
+
+        /* Animation only when that particular box is hovered */
+
+        .box:hover {
+            transform: rotate(360deg);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="box linear">Linear</div>
+    <div class="box ease">Ease</div>
+    <div class="box ease-in">Ease-in</div>
+    <div class="box ease-out">Ease-out</div>
+    <div class="box ease-in-out">Ease-in-out</div>
+
+</body>
+</html>
+```
