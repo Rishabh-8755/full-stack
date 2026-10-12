@@ -29,4 +29,22 @@ console.log(name);
 
 //LET KEYWORD
 // it is block scope variable. it can be accessed only inside the block.
-let age = 30;
+let client = "Alice";
+console.log(client);
+{
+    let innerClient = "inner Alice"; // it is block scope variable. it can be accessed only inside the block.
+    console.log(innerClient);
+}
+console.log(innerClient); // it will give error because innerClient is block scope
+
+let client = "new Alice"; // (redeclaration) we cannot redeclare the let variable
+
+// const KEYWORD
+// it is block scope variable. it can be accessed only inside the block.
+//reassignment and redeclaration is not allowed for const variable.
+
+//variable naming rules
+//1. variable name can contain letters, digits, underscores, and dollar signs.
+//2. variable name must begin with a letter, underscore, or dollar sign.
+//3. variable name cannot be a reserved keyword.
+//4. variable name is case sensitive
