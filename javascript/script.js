@@ -48,3 +48,22 @@ let client = "new Alice"; // (redeclaration) we cannot redeclare the let variabl
 //2. variable name must begin with a letter, underscore, or dollar sign.
 //3. variable name cannot be a reserved keyword.
 //4. variable name is case sensitive
+
+//data types
+//1. primitive data types 2. non-primitive data types
+
+//primitive data types
+//1. string 2. number 3. boolean 4. null 5. undefined 6. symbol
+
+//non-primitive data types
+//1. object 2. array 3. function
+
+let str = "Hello World"; 
+//string methods
+console.log(str.length);
+console.log(str.toUpperCase());
+console.log(str.toLowerCase());
+console.log(str[0]);
+console.log(str.at(0));
+console.log(str.charCodeAt(0)); // it will give the unicode of the character at the given index
+console.log(str.charAt(0)); // it will give the character at the given index
