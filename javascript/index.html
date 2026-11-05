@@ -6,7 +6,35 @@
     <title>Document</title>
 </head>
 <body>
+    <form>
+        <input type="text" name="demo" value="hello world">
+        <input type="radio" name="demo" value="hello world">
+        <input type="radio" name="demo" value="hello world">
+    </form>
+    <button onclick="myFunction()">Click me</button>
     <script>
+        function getdata() {
+            let element = document.getElementById("demo");
+            console.log(element);
+            element.innerHTML = "hello world";
+        }
+        //dom :document object model
+        //let element = document.getElementById("demo");
+        let element = document.getElementsByClassName("demo");
+        console.log(element);
+        for (let i = 0; i < element.length; i++) {
+            console.log(element[i]);
+        }
+        element[0].innerHTML = "hello world";
+        let element1 = document.getElementsByTagName("h1");
+        console.log(element1);
+        console.log(element1[0]);
+        element1[0].innerHTML = "hello world";
+        let elemByname = document.getElementsByName("demo");
+        console.log(elemByname);
+        elemByname[0].checked = true;
+        console.log(elementAll[0].textContent);
+        //
         console.time("time");
         document.write("hello world");
         console.log("hello world"); //it is used to test the error 
@@ -16,6 +44,7 @@
         console.timeEnd("time");
     </script>
     <script src="script.js"></script>
+    
     
 </body>
 </html>

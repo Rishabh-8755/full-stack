@@ -273,7 +273,7 @@ data.map((v, i)=>{
     document.write("<h1>" + v + "</h1>");
     document.write(`<div class="card"><h1>${v}</h1><p>${i}</p></div>`);
     console.log(v, i);
-};
+});
 
 //reduce method is used to reduce the array to a single value. it does not modify the original array.
 let arr5 = [1,2,3,4,5];
@@ -281,3 +281,102 @@ let sum = arr5.reduce((acc, curr)=>{
     return acc + curr;
 }, 0);
 console.log(sum);
+
+//accumulator is the value that is returned after each iteration. it is the first parameter of the callback function. it is initialized with the initial value that is passed as the second parameter of the reduce method. if no initial value is passed, then the first element of the array is used as the initial value and the iteration starts from the second element.
+console.log("accumulator: ", sum); // it will print the final value of the accumulator after all iterations are completed.  
+//forEach method is used to execute a provided function once for each array element. it does not modify the original array.
+let arr6 = [1,2,3,4,5];
+arr6.forEach((a)=>{
+    console.log(a);
+});
+//fill , join ,
+//object is a collection of key-value pairs. it is used to store multiple values in a single variable. it is an object in javascript.
+let obj = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+console.log(obj);
+document.write(obj.name);
+//object methods
+console.log(obj.name);
+console.log(obj.age);
+console.log(obj["city"]);
+obj.country = "USA"; // it will add a new key-value pair to the object.
+console.log(obj);
+delete obj.age; // it will delete the key-value pair from the object.
+console.log(obj);
+
+let price=1000;
+let newobj={
+    price:price,
+    discount:10,
+    finalPrice: price - (price * 0.1)
+};
+let keyname = "discount";
+newobj[keyname] = 20; // it will update the value of the key "discount" to 20.
+let newkeyname = "finalPrice";
+//here we converting the price varialbe to key value pair in the object
+newobj[newkeyname] = price - (price * (newobj.discount/100)); // it will update the value of the key "finalPrice" to 800.
+console.log(newobj);
+let data = {
+    name: "John",
+    age: 30,};
+//let name = data.name; // it will assign the value of the key "name" to the variable "name".
+//object destructuring is a way to extract values from an object and assign them to variables. it is a shorthand syntax for extracting values from an object.\
+let {name, age} = data; // it will assign the value of the key "name" to the variable "name" and the value of the key "age" to the variable "age".
+console.log(name, age);
+
+let obj1 = {
+    name: "John",
+    age: 30,};
+let obj2 = {
+    age: 25,};
+//mearge two objects using spread operator
+let mergedObj = {...obj1, ...obj2 , address: "New York "}; // it will merge the two objects and the value of the key "age" will be overwritten by the value of the key "age" in obj2.
+console.log(mergedObj);
+function sum(...a){
+    console.log(a);
+}
+sum(1,2,3,4,5,6,7,8,9,10); // it will print the array [1,2,3,4,5,6,7,8,9,10] because the rest operator is used to collect all the arguments passed to the function into an array.
+let arr = [1,2,3,4,5];
+console.log(...arr); // it will print the elements of the array 1 2 3 4 5 because the spread operator is used to spread the elements of the array into individual elements.
+let newArr = [...arr, 6,7,8,9,10]; // it will create a new array [1,2,3,4,5,6,7,8,9,10] because the spread operator is used to spread the elements of the array into individual elements and then add the new elements to the new array.
+console.log(newArr);
+//spread operator is used to spread the elements
+//  of an array or object into individual elements.
+//  it is used to copy the elements of an array or object
+//  into a new array or object.
+// object methods we can use object methods to manipulate the object. we can use Object.keys(), Object.values(), Object.entries() to get the keys, values and entries of the object respectively.
+let obj = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+console.log(Object.keys(obj)); // it will print the keys of the object [ 'name', 'age', 'city' ]
+console.log(Object.values(obj)); // it will print the values of the object [ 'John', 30, 'New York' ]
+console.log(Object.entries(obj)); // it will print the entries of the object [ [ 'name', 'John' ], [ 'age', 30 ], [ 'city', 'New York' ] ]
+console.log(Object.hasOwn(obj, "name")); // it will print true because the object has the key "name"
+//freeze method is used to freeze the object. it prevents the modification of the object. it does not allow adding, deleting or modifying the properties of the object.
+Object.freeze(obj);
+obj.name = "Alice"; // it will not change the value of the key "name" because the object is frozen.
+obj.age = 25; // it will not change the value of the key "age" because the object is frozen.
+console.log(obj); // it will print the frozen object because the object is frozen and the values of the keys are
+//  not changed.
+console.log(Object.isFrozen(obj)); // it will print true because the object is frozen.
+//seal method is used to seal the object. it prevents the addition of new properties to the object. it does not allow adding new properties to the object but allows modifying the existing properties of the object.
+Object.seal(obj);
+obj.name = "Alice"; // it will change the value of the key "name" because the object is sealed and the existing properties can be modified.
+obj.age = 25; // it will change the value of the key "age" because the object is sealed and the existing properties can be modified.
+obj.country = "USA"; // it will not add the new key-value pair to the object because the object is sealed and new properties cannot be added.
+console.log(obj);
+console.log(Object.isSealed(obj)); // it will print true because the object is sealed.
+//error:-
+//console.log(undeclaredVariable); // it will give error because the variable is not declared.
+let a=10;
+//dom :document object model is a programming interface for web documents. it represents the page so that programs can change the document structure, style, and content. the dom represents the document as nodes and objects. that way, programming languages can connect to the page.
+console.log(document); // it will print the document object in the console.
+console.log(document.body); // it will print the body of the document in the console.
+console.log(document.head);
+console.log(document.title);
+console.log(document.links);
