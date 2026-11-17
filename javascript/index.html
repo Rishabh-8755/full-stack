@@ -1,50 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        form {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        input,
+        textarea,
+        button {
+            font: inherit;
+            padding: 10px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+
+        #form-result {
+            min-height: 1.5em;
+        }
+    </style>
 </head>
 <body>
-    <form>
-        <input type="text" name="demo" value="hello world">
-        <input type="radio" name="demo" value="hello world">
-        <input type="radio" name="demo" value="hello world">
+    <h1>Task List</h1>
+
+    <form id="task-form">
+        <label for="title">Task ka naam</label>
+        <input id="title" name="title" type="text" required>
+
+        <label for="description">Task ki detail</label>
+        <textarea id="description" name="description" rows="3" required></textarea>
+
+        <button type="submit">Task add karein</button>
     </form>
-    <button onclick="myFunction()">Click me</button>
+
+    <p id="form-result" role="status" aria-live="polite"></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody id="task-list"></tbody>
+    </table>
+            <h1>Events</h1>
+        <button>red</button>
+        <button onclick="eventhandling('click')">click</button>
+        <button onclick="eventhandling('dbclick')">doubleclick</button>
+        <button onclick="eventhandling('contextmenu')">menuclick</button>
+        <button onclick="eventhandling('mousemove')">mousehover</button>
+        <button onclick="eventhandling('mouseenter')">mouseclick</button>
+        <button onclick="eventhandling('mousewheel')">scroll</button>
+        <button onclick="eventhandling('mouseout')">mouseout</button>
+
     <script>
-        function getdata() {
-            let element = document.getElementById("demo");
-            console.log(element);
-            element.innerHTML = "hello world";
+        const form = document.getElementById("task-form");
+        const taskList = document.getElementById("task-list");
+        const result = document.getElementById("form-result");
+        const tasks = [];
+
+        // Diye gaye index wala task delete karke list dobara dikhate hain.
+        function deleteHandler(index) {
+            tasks.splice(index, 1);
+            showTasks();
+            result.textContent = "Task delete kar diya gaya.";
         }
-        //dom :document object model
-        //let element = document.getElementById("demo");
-        let element = document.getElementsByClassName("demo");
-        console.log(element);
-        for (let i = 0; i < element.length; i++) {
-            console.log(element[i]);
+
+        // Array ke tasks ko table mein dikhate hain.
+        function showTasks() {
+            taskList.replaceChildren();
+
+            tasks.forEach(function (task, index) {
+                const row = document.createElement("tr");
+                const numberCell = document.createElement("td");
+                const titleCell = document.createElement("td");
+                const descriptionCell = document.createElement("td");
+                const actionCell = document.createElement("td");
+                const deleteButton = document.createElement("button");
+
+                numberCell.textContent = index + 1;
+                titleCell.textContent = task.title;
+                descriptionCell.textContent = task.description;
+                deleteButton.type = "button";
+                deleteButton.textContent = "Delete";
+                deleteButton.dataset.index = String(index);
+                deleteButton.setAttribute("aria-label", `${task.title} delete karein`);
+
+                actionCell.append(deleteButton);
+                row.append(numberCell, titleCell, descriptionCell, actionCell);
+                taskList.append(row);
+            });
         }
-        element[0].innerHTML = "hello world";
-        let element1 = document.getElementsByTagName("h1");
-        console.log(element1);
-        console.log(element1[0]);
-        element1[0].innerHTML = "hello world";
-        let elemByname = document.getElementsByName("demo");
-        console.log(elemByname);
-        elemByname[0].checked = true;
-        console.log(elementAll[0].textContent);
-        //
-        console.time("time");
-        document.write("hello world");
-        console.log("hello world"); //it is used to test the error 
-        console.warn("warning");
-        console.error("error");
-        console.info("information");
-        console.timeEnd("time");
+
+        // Event delegation: table par click listener lagakar delete button ko detect karte hain.
+        taskList.addEventListener("click", function (event) {
+            const deleteButton = event.target.closest("button[data-index]");
+
+            if (!deleteButton) {
+                return;
+            }
+
+            const index = Number(deleteButton.dataset.index);
+            deleteHandler(index);
+        });
+
+        // Form submit hone par naya task list mein add hota hai.
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const title = formData.get("title").trim();
+            const description = formData.get("description").trim();
+
+            if (!title || !description) {
+                result.textContent = "Task ka naam aur detail dono bharein.";
+                return;
+            }
+
+            tasks.push({ title: title, description: description });
+            showTasks();
+            form.reset();
+            result.textContent = "Task successfully add ho gaya.";
+        });
+        const input = document.getElementById("title");
+        input.addEventListener("keyup", (e) => {
+            console.log(e.target.value);
+        });
+        input.addEventListener("input", (e) => {
+            document.querySelector("p").textContent=e.target.value
+        });
+
     </script>
-    <script src="script.js"></script>
-    
-    
 </body>
 </html>
